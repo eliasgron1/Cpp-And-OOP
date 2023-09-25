@@ -7,7 +7,7 @@ void sortArray(char *pchars);
 const int MAX_CHAR = 20;
 
 int main(){
-char chars[MAX_CHAR];
+char chars[MAX_CHAR] = "";
 char *pchars = &chars[0];
 
 cout << "Give a string of characters" << endl;
@@ -15,18 +15,13 @@ cin >> chars;
 
 sortArray(pchars);
 
-
-
-for(int i=0; *(pchars + i) != '0'; i){
-cout << *(pchars+i);
-    
+int i=1;
+while(i < MAX_CHAR){
+    cout << *(pchars + MAX_CHAR -i);
+    i++;
 }
+cout << endl;
 
-
-// for(int i=MAX_CHAR; i>0; i--){
-//     if(*(pchars+i) > 96 && *(pchars+i) < 123 ) cout << *(pchars+i);
-    
-// }
 
 return 0;
 }
