@@ -4,36 +4,34 @@
 using namespace std;
 
 
-
-void matrixSum(int matrix1[][],int matrix2[][], int sumOfMatrix[][], int sizesx[0] int sizesy[0]);
+int getSizes(int *pSizesx, int *pSizesy);
 
 
 int main(){ 
 srand(time(NULL));
 
+
 int sizesx[2];
 int sizesy[2];
 
-for(int i=0; i<2; i++){
-sizesx[i] = rand() % 3 + 3;
-sizesy[i] = sizesx[i];
-cout << sizesx[i] << " ";
-cout << sizesy[i] << "   ";
-}
-cout << endl;
-
-int matrix1[sizesy[0]][sizesx[0]];
-int matrix2[sizesy[1]][sizesx[1]];
-int sumOfMatrix[sizesx[0]][sizesy[0]];
+int *pSizesx = sizesx;
+int *pSizesy = sizesy;
+getSizes(pSizesx, pSizesy);
 
 
-for(int i=0; i<=sizesy[0]; i++){             //values for matrix1
-    for(int j=0; j<sizesx[0]; j++){
+
+int matrix1[*(pSizesy+0)][*(pSizesx+0)];
+int matrix2[*(pSizesy+1)][*(pSizesx+1)];
+
+
+for(int i=0; i < *(pSizesy+0); i++){             //values for matrix1
+    for(int j=0; j < *(pSizesx+0); j++){
         matrix1[i][j]=rand() % 5;
     }
 }
-for(int i=0; i<=sizesy[1]; i++){             //values for matrix2
-    for(int j=0; j<sizesx[1]; j++){
+
+for(int i=0; i < *(pSizesy+1); i++){             //values for matrix2
+    for(int j=0; j < *(pSizesx+1); j++){
         matrix2[i][j]=rand() % 5;
     }
 }
@@ -41,7 +39,7 @@ for(int i=0; i<=sizesy[1]; i++){             //values for matrix2
 
 
 cout << endl << endl;
-for(int i=0; i<=sizesy[0]; i++){             //print values for matrix1
+for(int i=0; i<sizesy[0]; i++){             //print values for matrix1
     for(int j=0; j<sizesx[0]; j++){
         cout << matrix1[i][j] << " ";
     }
@@ -49,25 +47,33 @@ for(int i=0; i<=sizesy[0]; i++){             //print values for matrix1
 }
 
 cout << endl << endl;
-for(int i=0; i<=sizesy[1]; i++){             //print values for matrix2
+for(int i=0; i<sizesy[1]; i++){             //print values for matrix2
     for(int j=0; j<sizesx[1]; j++){
         cout << matrix2[i][j] << " ";
     }
     cout << endl;
 }
-matrixSum(matrix1[][], matrix2[][], sumOfMatrix[][], sizesx[0], sizesy[0])
+
 
 return 0;
 }
 
 
-void matrixSum(int matrix1[][],int matrix2[][], int sumOfMatrix[][], int sizesx[0] int sizesy[0]){
+
+
+int getSizes(int *pSizesx, int *pSizesy){
+for(int i=0; i<2; i++){
+    *(pSizesx + i) = 3;                                // add rand() here
+    *(pSizesy + i) = *(pSizesx + i);
+    cout << *(pSizesx + i)  << " ";
+    cout << *(pSizesy + i)  << "   ";
+}
 cout << endl;
-for(int i=0; i<sizesx[0]; i++){
-    for(int j=0; j<sizesy[0]; j++){
-        sumOfMatrix[j][i]=(matrix1[j][i] + matrix2[j][i]);
-        cout << sumOfMatrix[j][i] << " ";
-    }
-    cout << endl;
+
+return 0;
 }
-}
+
+
+
+
+
