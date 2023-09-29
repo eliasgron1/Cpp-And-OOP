@@ -14,6 +14,8 @@ void printMatrix1Values(int matrix1[][MAX_COL], int, int, int*, int* );
 void printMatrix2Values(int matrix2[][MAX_COL], int, int, int*, int* );
 
 void calculateSum(int matrix1[][MAX_COL],int matrix2[][MAX_COL], int, int, int*, int* );
+void calculateSubtraction(int matrix1[][MAX_COL],int matrix2[][MAX_COL], int, int, int*, int*);
+void calculateMultiplication(int matrix1[][MAX_COL],int matrix2[][MAX_COL], int, int, int*, int*);
 
 
 int main(){                                              // Main Function
@@ -37,6 +39,8 @@ printMatrix1Values(matrix1, MAX_ROW, MAX_COL, pSizesx, pSizesy);
 printMatrix2Values(matrix2, MAX_ROW, MAX_COL, pSizesx, pSizesy);
 
 calculateSum(matrix1, matrix2, MAX_ROW, MAX_COL, pSizesy, pSizesx);
+calculateSubtraction(matrix1, matrix2, MAX_ROW, MAX_COL, pSizesy, pSizesx);
+calculateMultiplication(matrix1, matrix2, MAX_ROW, MAX_COL, pSizesy, pSizesx);
 
 return 0;
 }
@@ -58,7 +62,6 @@ for(int i=0; i<2; i++){
     cout << MAX_ROW-*(pSizesy+0)  << "   ";
 }
 cout << endl << endl;
-
 }
 
 
@@ -69,7 +72,6 @@ for(int i=0; i < MAX_ROW-*(pSizesy+0); i++){             //values for matrix1
         matrix1[i][j]=rand() % 5;
     }
 }
-
 }
 
 
@@ -80,7 +82,6 @@ for(int i=0; i < MAX_ROW-*(pSizesy+1); i++){             //values for matrix2
         matrix2[i][j]=rand() % 5;
     }
 }
-
 }
 
 
@@ -106,17 +107,57 @@ cout << endl;
 
 
 
-
 void calculateSum(int matrix1[][MAX_COL],int matrix2[][MAX_COL], int MAX_ROW, int MAX_COL, int* pSizesy, int* pSizesx){
-int matrixSum[MAX_ROW][MAX_COL];
+int matrixSum[MAX_ROW][MAX_COL] = {};
 cout << "Sum is" << endl;
+
+for(int i=0; i<MAX_ROW-*(pSizesy+0); i++){
+    for(int j=0; j<MAX_COL-*(pSizesx+0); j++){
+        matrixSum[i][j] += matrix1[i][j];
+    }
+}
 for(int i=0; i<MAX_ROW-*(pSizesy+1); i++){
     for(int j=0; j<MAX_COL-*(pSizesx+1); j++){
-        cout << matrix1[i][j] + matrix2[i][j] << " ";
+        matrixSum[i][j] += matrix2[i][j];
+
+        cout << matrixSum[i][j] << " ";
     }
     cout << endl;
 }
+}
 
 
+void calculateSubtraction(int matrix1[][MAX_COL],int matrix2[][MAX_COL], int MAX_ROW, int MAX_COL, int* pSizesy, int* pSizesx){
+int matrixSum[MAX_ROW][MAX_COL] = {};
+cout << "Subtraction is" << endl;
+
+for(int i=0; i<MAX_ROW-*(pSizesy+0); i++){
+    for(int j=0; j<MAX_COL-*(pSizesx+0); j++){
+        matrixSum[i][j] = matrix1[i][j];
+    }
+}
+for(int i=0; i<MAX_ROW-*(pSizesy+1); i++){
+    for(int j=0; j<MAX_COL-*(pSizesx+1); j++){
+        matrixSum[i][j] -= matrix2[i][j];
+        cout << matrixSum[i][j] << " ";
+    }
+    cout << endl;
+}
+}
+
+
+void calculateMultiplication(int matrix1[][MAX_COL],int matrix2[][MAX_COL], int MAX_ROW, int MAX_COL, int* pSizesy, int* pSizesx){
+int matrixMul[MAX_ROW][MAX_COL] = {};
+cout << "Multiplication is" << endl;
+
+for(int i=0; i<MAX_ROW-*(pSizesy+0); i++){
+    for(int j=0; j<MAX_COL-*(pSizesx+1); j++){
+        for(int n=0; n<MAX_COL-*(pSizesx+0); n++){
+            matrixMul[i][j] += matrix1[i][n] * matrix2[n][j];
+        }
+        cout << matrixMul[i][j] << " ";
+    }
+    cout << endl;
+}
 }
 
