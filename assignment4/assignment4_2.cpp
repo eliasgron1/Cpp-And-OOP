@@ -4,7 +4,7 @@
 using namespace std;
 
 
-const int CUSTOMER_AMOUNT = 3;
+const int CUSTOMER_AMOUNT = 2;
 const int ROOM_AMOUNT = 2;
 const int LEN=20;
 
@@ -47,6 +47,11 @@ getRoomData(rooms);
 getCustomerData(rooms, customers);
 printAssignments(rooms, customers);
 
+rooms=NULL;
+customers=NULL;
+
+delete [] rooms;
+delete [] customers;
 
 return 0;
 }
