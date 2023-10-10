@@ -12,7 +12,7 @@ const int LEN=20;
 struct Room {
 int room_id;
 char room_type[LEN];
-bool is_free;
+bool is_free = true;
 double price_per_night;
 };
 
@@ -63,13 +63,11 @@ return 0;
 
 void getRoomData(Room rooms[ROOM_AMOUNT]){
 for(int i=0;i<ROOM_AMOUNT;i++){
-cout << "Enter room id" << endl;
+cout << endl << "Enter room id: " ;
     cin >> rooms->room_id;
-cout << "Is the room free (1/0)" << endl;
-    cin >> rooms->is_free;
-cout << "What is the room type" << endl;
+cout << endl << rooms->room_id << ". What is the room type: ";
     cin >> rooms->room_type;
-cout << "Enter room price per night" << endl;
+cout << endl << rooms->room_id<< ". Enter room price per night: ";
     cin >> rooms->price_per_night;
 rooms++;
 }
@@ -83,9 +81,9 @@ void getCustomerData(Room rooms[ROOM_AMOUNT], Customer customers[CUSTOMER_AMOUNT
 
 for(int i=0;i<CUSTOMER_AMOUNT;i++){
 int desired_room_id=0;
-cout << "Enter Name" << endl;
+cout << endl << "Enter Name: " ;
     cin >> customers[i].customer_name;
-cout << "Enter desired room id" << endl;
+cout << endl << "Enter desired room id: " ;
     cin >> desired_room_id;
     
     for(int j=0; j<ROOM_AMOUNT; j++){
@@ -94,7 +92,7 @@ cout << "Enter desired room id" << endl;
                 customers[i].room_id = desired_room_id;
                 rooms[j].is_free = false;
 
-                cout << "Enter number Of nights" << endl; 
+                cout << endl << "Enter number Of nights: ";
                 cin >> customers[i].number_of_nights;
             }
             else if(rooms[j].is_free==false) cout << "!!room occupied!!" <<endl;
@@ -114,7 +112,7 @@ cout <<"Room id: " << rooms[i].room_id << "   Room type:   "<< rooms[i].room_typ
 for(int j=0; j<CUSTOMER_AMOUNT;j++){
     if(rooms[i].room_id==customers[j].room_id){
         cout << "   Assigned to: " << customers[j].customer_name << " For " << customers[j].number_of_nights << " Nights";
-        cout << "   Total cost: " << (customers[j].number_of_nights * rooms[i].price_per_night);
+        cout << "   Total cost: " << (customers[j].number_of_nights * rooms[i].price_per_night) ;
     }
 }
 
