@@ -97,7 +97,7 @@ cout << "Enter desired room id" << endl;
                 cout << "Enter number Of nights" << endl; 
                 cin >> customers[i].number_of_nights;
             }
-            else if(rooms[j].is_free==false) cout << "!!room occupied!!" << endl <<endl;
+            else if(rooms[j].is_free==false) cout << "!!room occupied!!" <<endl;
         }
     }
 }
