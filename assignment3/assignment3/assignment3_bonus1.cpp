@@ -51,6 +51,7 @@ return 0;
 
 
 void getSizes(int *pSizesx, int *pSizesy){
+cout << "dimentions are ";
 for(int i=0; i<2; i++){
     *(pSizesx + i) = 1;                                // add rand() here
     *(pSizesy + i) = *(pSizesx + i);
