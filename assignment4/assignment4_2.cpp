@@ -23,9 +23,9 @@ int number_of_nights;
 };
 
 
-void getRoomData(Room rooms[ROOM_AMOUNT]);
-void getCustomerData(Room rooms[ROOM_AMOUNT], Customer customers[CUSTOMER_AMOUNT]);
-void printAssignments(Room rooms[ROOM_AMOUNT], Customer customers[CUSTOMER_AMOUNT]);
+void getRoomData(Room*);
+void getCustomerData(Room*, Customer*);
+void printAssignments(Room*, Customer*);
 
 
 
@@ -107,15 +107,14 @@ void printAssignments(Room rooms[ROOM_AMOUNT],Customer customers[CUSTOMER_AMOUNT
 cout << endl << "-----------------------------------------------------------------------------------------------------------------" << endl;
 
 for(int i=0;i<ROOM_AMOUNT;i++){
-cout <<"Room id: " << rooms[i].room_id << "   Room type:   "<< rooms[i].room_type <<"   Price Per Night:   " << rooms[i].price_per_night;
-    
+cout <<"Room id: " << rooms[i].room_id << "   Room type:  "<< rooms[i].room_type <<"   Price Per Night:   " << rooms[i].price_per_night;
+   
 for(int j=0; j<CUSTOMER_AMOUNT;j++){
     if(rooms[i].room_id==customers[j].room_id){
         cout << "   Assigned to: " << customers[j].customer_name << " For " << customers[j].number_of_nights << " Nights";
         cout << "   Total cost: " << (customers[j].number_of_nights * rooms[i].price_per_night) ;
     }
 }
-
 cout << endl << "-----------------------------------------------------------------------------------------------------------------" << endl;
 }
 }
