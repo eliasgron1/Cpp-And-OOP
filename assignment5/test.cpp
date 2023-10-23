@@ -1,30 +1,26 @@
 #include <iostream>
-using namespace std;
-//This is the function prototype
-int calc_sum(int, int);
-int main(void) {
-	int lower_bound, upper_bound, total_sum;
-	cout << "Type two integer values: ";
-	cin >> lower_bound >> upper_bound;
-	total_sum = calc_sum(lower_bound, upper_bound);
-	cout <<endl<<"The sum is: ";
-	cout <<"The sum of numbers between "<<lower_bound<<" and "<<upper_bound<<" are: "<< total_sum<<endl;
-	return 0;
+#include <string>
+
+void printStrings(const std::string* strings, int size) {
+    for (int i = 0; i < size; i++) {
+        std::cout << strings[i] << std::endl;
+    }
 }
-//Here we define calc_sum recursive function
-int calc_sum(int lower_bound, int upper_bound) {
-	int temp;
-	if (lower_bound > upper_bound) {
-		temp = lower_bound;
-		lower_bound = upper_bound;
-		upper_bound = temp;
-	}
-	int sum;
-	//This is the termination condition of recursion
-	if (lower_bound == upper_bound)
-		return upper_bound;
-	//Here the function calls itself
-	sum = calc_sum(lower_bound, upper_bound - 1) + upper_bound;
-	cout <<"The sum of numbers between "<<lower_bound<<" and "<<upper_bound<<" are: "<< sum<<endl;
-	return(sum);
+
+int main() {
+    int size;
+    std::cout << "Enter the number of strings: ";
+    std::cin >> size;
+
+    // Create an array of strings based on user input
+    std::string myStrings[size];
+    for (int i = 0; i < size; i++) {
+        std::cout << "Enter string " << i + 1 << ": ";
+        std::cin >> myStrings[i];
+    }
+
+    // Pass the array to the function using a pointer
+    printStrings(myStrings, size);
+
+    return 0;
 }
