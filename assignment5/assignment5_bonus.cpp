@@ -17,7 +17,7 @@ void swap        (char   *name1,char *name2);
 
 // MAIN
 
-int main() {
+int main(void) {
 int name_count = getNameCount();
 string names[name_count];
 
@@ -50,7 +50,6 @@ for(int i=0;i<name_count;i++){
 }
 
 
-
 void sortNames(string *names, int name_count){
 for(int i=0;i<name_count-1;i++){
     for(int j=0;j<name_count-1;j++){
@@ -59,6 +58,7 @@ for(int i=0;i<name_count-1;i++){
 }
 }
 
+
 void swap(char* name1, char* name2){
 char temp[20];
     strncpy(temp, name1, LEN);
@@ -66,12 +66,10 @@ char temp[20];
     strncpy(name2, temp, LEN);
 }
 
+
 void printNames(string *names, int name_count){
     for(int i=0;i<name_count;i++){
         cout << names[i] << ", ";
     }
-
-
-cout << endl << "-------------------------------------------------------------------------" << endl;
 }
 
