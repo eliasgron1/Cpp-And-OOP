@@ -41,7 +41,7 @@ for(int j=i+1; j<SIZE; j++){
             swap(names[i], names[j]);
             swap(names_copy[i], names_copy[j]);
     }
-  }
+  }     
 }
 cout<<"Names sorted in ascending order:"<<endl;
     for (int i=0; i<SIZE; i++){

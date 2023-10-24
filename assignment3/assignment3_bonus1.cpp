@@ -12,6 +12,8 @@ void initialize(int [][10], int, int);
 void display(int matrix[][10], int, int);
 void sum(int matrix[][COLUMN_SIZE], int, int);
 
+
+int main(void){
     int matrix [ROW_SIZE][COLUMN_SIZE];
 
     initialize(matrix, ROW_SIZE, COLUMN_SIZE);
