@@ -15,6 +15,7 @@ public:
 
     Hotel(string, string, int, int);
     Hotel();
+    ~Hotel();
     
     class Room {
         string type;
@@ -25,7 +26,7 @@ public:
 
         Room(string, double, int, int);
         Room();
-
+        ~Room();
         void printRoom();
 
 };
@@ -40,6 +41,7 @@ public:
 
         Customer(string, string, string, int, int);
         Customer();
+        ~Customer();
 
         void printCust();
         
@@ -77,6 +79,14 @@ Hotel::Customer *customersObj = new Hotel::Customer[customer_amount];
 hotelsObj[i].createCustObj(i,hotelsObj,customersObj, customer_amount);
 
 hotelsObj[i].print(roomsObj, customersObj, customer_amount);
+
+hotelsObj=NULL;
+roomsObj=NULL;
+customersObj=NULL;
+
+delete [] hotelsObj;
+delete [] roomsObj;
+delete [] customersObj;
 
 
 return 0;
@@ -124,6 +134,21 @@ this->address = "address:not_known";
 this->arrival_date = "arrival_date:not_known";
 this->nights_stayed = 0;
 this->number = 0;
+}
+
+
+
+
+// DESTRUCTORS
+
+Hotel::~Hotel(){
+cout << endl << "freeing memory for " << this->name << endl;
+}
+Hotel::Room::~Room(){
+cout << "freeing memory for room " << this->number << endl;
+}
+Hotel::Customer::~Customer(){
+cout << "freeing memory for customer " << this->number << endl;
 }
 
 
@@ -211,11 +236,6 @@ for(int i=0;i<HOTEL_AMOUNT;i++){
     }
 
 }
-
-    // string name;
-    // string address;
-    // int num_of_stars;
-    // int num_of_rooms;
 
 }
 
