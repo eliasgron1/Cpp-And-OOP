@@ -100,65 +100,6 @@ return 0;
 
 
 
-// CONSTRUCTORS
-
-Hotel::Hotel(string name, string address, int num_of_stars, int num_of_rooms){
-this->name = name;
-this->address = address;
-this->num_of_stars = num_of_stars;
-this->num_of_rooms = num_of_rooms;
-}
-Hotel::Hotel(){
-this->name = "name:not_known";
-this->address = "address:not_known";
-this->num_of_stars = 0;
-this->num_of_rooms = 0;
-}
-Hotel::Room::Room(string type, double price_per_night, int number, int size){
-this->type = type;
-this->price_per_night=price_per_night;
-this->number=number;
-this->size=size;
-}
-Hotel::Room::Room(){
-this->type = "type:not_known";
-this->price_per_night=0;
-this->number=0;
-this->size=0;
-}
-Hotel::Customer::Customer(string name, string address, string arrival_date, int nights_stayed, int number){
-this->name = name;
-this->address = address;
-this->arrival_date = arrival_date;
-this->nights_stayed = nights_stayed;
-this->number = number;
-}
-Hotel::Customer::Customer(){
-this->name = "name:not_known";
-this->address = "address:not_known";
-this->arrival_date = "arrival_date:not_known";
-this->nights_stayed = 0;
-this->number = 0;
-}
-
-
-
-
-// DESTRUCTORS
-
-Hotel::~Hotel(){
-cout << endl << "freeing memory for " << this->name << endl;
-}
-Hotel::Room::~Room(){
-cout << "freeing memory for room " << this->number << endl;
-}
-Hotel::Customer::~Customer(){
-cout << "freeing memory for customer " << this->number << endl;
-}
-
-
-
-
 // FUNCTIONS
 
 void createObj(Hotel *hotelsObj){
@@ -267,3 +208,59 @@ cout << setw(30) << left <<"Customer Assigned To Room: "<<this->number << endl;
 cout << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -" << endl;
 }
 
+
+// CONSTRUCTORS
+
+Hotel::Hotel(string name, string address, int num_of_stars, int num_of_rooms){
+this->name = name;
+this->address = address;
+this->num_of_stars = num_of_stars;
+this->num_of_rooms = num_of_rooms;
+}
+Hotel::Hotel(){
+this->name = "name:not_known";
+this->address = "address:not_known";
+this->num_of_stars = 0;
+this->num_of_rooms = 0;
+}
+Hotel::Room::Room(string type, double price_per_night, int number, int size){
+this->type = type;
+this->price_per_night=price_per_night;
+this->number=number;
+this->size=size;
+}
+Hotel::Room::Room(){
+this->type = "type:not_known";
+this->price_per_night=0;
+this->number=0;
+this->size=0;
+}
+Hotel::Customer::Customer(string name, string address, string arrival_date, int nights_stayed, int number){
+this->name = name;
+this->address = address;
+this->arrival_date = arrival_date;
+this->nights_stayed = nights_stayed;
+this->number = number;
+}
+Hotel::Customer::Customer(){
+this->name = "name:not_known";
+this->address = "address:not_known";
+this->arrival_date = "arrival_date:not_known";
+this->nights_stayed = 0;
+this->number = 0;
+}
+
+
+
+
+// DESTRUCTORS
+
+Hotel::~Hotel(){
+cout << endl << "freeing memory for " << this->name << endl;
+}
+Hotel::Room::~Room(){
+cout << "freeing memory for room " << this->number << endl;
+}
+Hotel::Customer::~Customer(){
+cout << "freeing memory for customer " << this->number << endl;
+}

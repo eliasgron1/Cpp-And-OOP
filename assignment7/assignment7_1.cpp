@@ -67,6 +67,7 @@ switch(command){
         break;
 
 
+
 }
 }
 return 0;
@@ -87,13 +88,36 @@ cout << "Salary: " << this->salary << endl;
 
 }
 
-
 Employee* Employee::search(int id, string name, string job){
 if(this->id   == id)  { return this; }
 if(this->name == name){ return this; }
 if(this->job  == job) { return this; }
 
 return NULL;
+}
+
+void Employee::update(){
+string name;
+string job;
+int id;
+float salary;
+
+cout << "Enter new employee id: ";
+    cin >> id;
+    this->id = id;
+
+cout << "Enter new employee name: ";
+    cin >> name;
+    this->name = name;
+
+cout << "Enter new employee job: ";
+    cin >> job;
+    this->job = job;
+
+cout << "Enter new employee salary: ";
+    cin >> salary;
+    this->salary = salary;
+
 }
 
 
@@ -124,7 +148,8 @@ void deleteEmployee(vector<Employee> &employee){
 
 void searchEmployee(vector<Employee> employee){
 int id_search = 0, input = 0;
-string name_search =" ";
+char update;
+string name_search= " ";
 string job_search = " ";
 
 cout << "1: Search by id" << endl;
@@ -154,9 +179,15 @@ switch(input){
 }
 
     for(auto obj : employee){
-        if((obj.search(id_search, name_search, job_search)) !=NULL ) obj.toString();
-    }
+        if((obj.search(id_search, name_search, job_search)) !=NULL ){
+            obj.toString();
 
+            cout << "Type 'U' to update employee data" << endl; 
+                cin >> update;
+                update = toupper(update);
+                if(update=='U') obj.update();
+        }
+    }
 }
 
 
