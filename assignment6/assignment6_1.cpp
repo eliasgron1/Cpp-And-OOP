@@ -4,7 +4,7 @@
 #include <cstring>
 using namespace std;
 
-const int HOTEL_AMOUNT = 1;
+const int HOTEL_AMOUNT = 2;
 
 class Hotel{
 public:
@@ -61,10 +61,13 @@ void createObj(Hotel *hotelsObj);
 // MAIN
 
 int main(){
-int i=0;
+
 
 Hotel *hotelsObj = new Hotel[HOTEL_AMOUNT];
 createObj(hotelsObj);
+
+
+for(int i=0; i<HOTEL_AMOUNT; i++){
 
 
 Hotel::Room *roomsObj = new Hotel::Room[hotelsObj[i].num_of_rooms];
@@ -80,6 +83,7 @@ hotelsObj[i].createCustObj(i,hotelsObj,customersObj, customer_amount);
 
 hotelsObj[i].print(roomsObj, customersObj, customer_amount);
 
+
 hotelsObj=NULL;
 roomsObj=NULL;
 customersObj=NULL;
@@ -88,6 +92,7 @@ delete [] hotelsObj;
 delete [] roomsObj;
 delete [] customersObj;
 
+}
 
 return 0;
 }

@@ -22,7 +22,7 @@ public:
     Employee();
     ~Employee();
 
-    Employee* search(int, string, string);
+    Employee* search(int);
     void toString(void);
     void update(void);
 
@@ -30,9 +30,9 @@ public:
 
 
 
-void deleteEmployee(vector<Employee>&);
+void deleteEmployee(vector<Employee>);
 void searchEmployee(vector<Employee>);
-void printMenu(int);
+void printMenu(void);
 void addEmployee(vector<Employee>&);
 
 
@@ -44,8 +44,8 @@ char command;
 vector<Employee> employee;
 
 while(command != 'X'){
-
-printMenu(employee.size());
+printMenu();
+    cout << employee.size() << endl;
     cin >> command;
     command = toupper(command);
 
@@ -60,10 +60,6 @@ switch(command){
     
     case 'S':
         searchEmployee(employee);
-        break;
-
-    case 'R':
-        deleteEmployee(employee);
         break;
 
 
@@ -88,10 +84,8 @@ cout << "Salary: " << this->salary << endl;
 }
 
 
-Employee* Employee::search(int id, string name, string job){
-if(this->id   == id)  { return this; }
-if(this->name == name){ return this; }
-if(this->job  == job) { return this; }
+Employee* Employee::search(int id){
+if(this->id == id){ return this; }
 
 return NULL;
 }
@@ -102,61 +96,23 @@ return NULL;
 
 // FUNCTIONS
 
-void deleteEmployee(vector<Employee> &employee){
-    int id_search;
-    cout << "Enter the employee ID to delete: ";
-    cin >> id_search;
-
-    for(int i=0; i<employee.size(); i++){
-        
-        if((employee[i].search(id_search, " ", " ")) !=NULL ) {
-            cout << "DELETED" << endl;
-            employee[i].toString();
-            employee.erase(employee.begin()+i);
-        }
-    }
-}
-
-
-
-
 
 
 void searchEmployee(vector<Employee> employee){
-int id_search = 0, input = 0;
-string name_search =" ";
-string job_search = " ";
+int id_search;
 
-cout << "1: Search by id" << endl;
-cout << "2: Search by name" << endl;
-cout << "3: Search by job" << endl; 
-    cin >> input;
+cout << "Enter employee id: ";
+    cin >> id_search;
 
-switch(input){
-    case 1:
-        cout << "Enter employee id: ";
-            cin >> id_search;
-    break;
 
-    case 2:
-        cout << "Enter employee name: ";
-            cin >> name_search;
-    break;
+        if((obj.search(id_search)) !=NULL ) obj.toString(); 
 
-    case 3:
-        cout << "Enter employee job: ";
-            cin >> job_search;
-    break;
-
-    default:
-        cout << "Incorrect input";
-    break;
-}
-
-    for(auto obj : employee){
-        if((obj.search(id_search, name_search, job_search)) !=NULL ) obj.toString();
-    }
-
+        // for(int i=0; i<employee.size(); i++){ 
+        //     if(employee[i].search(id_search)==employee[i]){
+        //         employee.erase(employee.begin()+i);
+        //         cout << "deleting: " << endl;
+        //     }
+        // }
 }
 
 
@@ -188,12 +144,10 @@ employee.push_back(employeeObj);
 
 
 
-void printMenu(int employee_count){
+void printMenu(){
 cout << endl << "**************************************************" << endl;
-cout << " " <<employee_count << "      Employees saved in DB" << endl << endl;
 cout <<" A      " << setw(10) << "Add employee" << endl;
 cout <<" P      " << setw(10) << "Print data" << endl;
-cout <<" R      " << setw(10) << "Remove data" << endl;
 cout <<" S      " << setw(10) << "Search employee" << endl;
 cout <<" X      " << setw(10) << "Exit program" << endl;
 cout << "**************************************************" << endl;
