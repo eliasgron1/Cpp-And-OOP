@@ -20,7 +20,6 @@ private:
 public:
     Employee(string, string, int, float);
     Employee();
-    ~Employee();
 
     Employee* search(int, string, string);
     void toString(void);
@@ -31,7 +30,7 @@ public:
 
 
 void deleteEmployee(vector<Employee>&);
-void searchEmployee(vector<Employee>);
+void searchEmployee(vector<Employee>&);
 void printMenu(int);
 void addEmployee(vector<Employee>&);
 
@@ -146,7 +145,7 @@ void deleteEmployee(vector<Employee> &employee){
 
 
 
-void searchEmployee(vector<Employee> employee){
+void searchEmployee(vector<Employee> &employee){
 int id_search = 0, input = 0;
 char update;
 string name_search= " ";
@@ -178,7 +177,7 @@ switch(input){
     break;
 }
 
-    for(auto obj : employee){
+    for(auto& obj : employee){
         if((obj.search(id_search, name_search, job_search)) !=NULL ){
             obj.toString();
 
@@ -246,8 +245,4 @@ this->name = "name:not_known";
 this->job = "job:not_known";
 this->id = 0;
 this->salary = 0;
-}
-Employee::~Employee(){
-    
-
 }
