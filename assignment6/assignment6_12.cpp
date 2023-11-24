@@ -26,7 +26,7 @@ public:
         Room(string, double, int, int);
         Room();
 
-        void printRoom();
+        void getRoom();
 
 };
 
@@ -41,17 +41,20 @@ public:
         Customer(string, string, string, int, int);
         Customer();
 
-        void printCust();
         
     };
 
-    void print(void);
-    void createRoomObj(int, Hotel*, Hotel::Room*);
-    void createCustObj(int i, Hotel*, Hotel::Customer*, int);
+    vector <Hotel::Room> rooms_obj;
+
+    void setRoom(Hotel::Room room) { this->rooms_obj.push_back(room); }
+    
+    void getHotel();
+    void createRoomObj(int, Hotel);
+    // void createCustObj(int i, Hotel*, Hotel::Customer*, int);
 };
 
 
-Hotel* createObj(void);
+Hotel createObj();
 void printMenu(void);
 
 
@@ -63,7 +66,7 @@ void printMenu(void);
 int main(){
 char command; 
 
-vector <Hotel*> hotels_obj;
+vector <Hotel> hotels_obj;
 
 
 while (command != 'X'){
@@ -80,11 +83,9 @@ switch(command){
     break;
 
     case 'P':
-        for(auto obj : hotels_obj){ obj->print(); }
+        for(auto obj : hotels_obj){ obj.getHotel(); }
     break;
     
-
-
 }
 }
 
@@ -97,19 +98,21 @@ return 0;
 
 // METHODS
 
-void Hotel::print(void){
+void Hotel::getHotel(){
 cout << endl << endl << "Hotel: " << this->name << "   " << this->address << "   Stars: " << this->num_of_stars << "   Rooms: " << this->num_of_rooms << endl;
 cout << "-----------------------------------------------------------------------" << endl;
 
-// for(int i=0;i<HOTEL_AMOUNT;i++){
-//     for(int j=0;j<this->num_of_rooms;j++){
-//         roomsObj[j].printRoom();
-//     }
-//     for(int n=0;n<customer_amount;n++){
-//         customersObj[n].printCust();
-//     }
+for(auto obj : this->rooms_obj) obj.getRoom();
 
-// }
+}
+
+
+void Hotel::Room::getRoom(void){
+cout << setw(30) <<left <<"Room Number: "              <<this->number << endl;
+cout << setw(30) <<left <<"Room Type: "                <<this->type << endl;
+cout << setw(30) <<left <<"Room price per night: "     <<this->price_per_night << endl;
+cout << setw(30) <<left <<"Room size: "                <<this->size << endl;
+cout << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -" << endl;
 
 }
 
@@ -119,9 +122,9 @@ cout << "-----------------------------------------------------------------------
 // FUNCTIONS
 
 
-Hotel* createObj(){
+Hotel createObj(){
 
-Hotel* hotel = new Hotel;
+Hotel hotel;
 
 string name, address;
 int num_of_stars, num_of_rooms;
@@ -134,7 +137,26 @@ cout << endl <<"Enter hotel address ";
 cout << endl <<"Enter number of stars and rooms ";
     cin >> num_of_stars >> num_of_rooms;
 
-*hotel=Hotel(name, address, num_of_stars, num_of_rooms);
+hotel=Hotel(name, address, num_of_stars, num_of_rooms);
+
+for(int j=0;j<num_of_rooms;j++){
+    Hotel::Room room;
+
+    int size, number;
+    string type;
+    float price_per_night;
+
+    cout << endl << "Enter hotel " << name << "'s room " << ". number. : ";
+        cin >> number;
+    cout << endl << "Enter hotel " << name << "'s room " << number << ". type. : ";
+        cin >> type;
+    cout << endl << "Enter hotel " << name << "'s room " << number << ". price/night. : ";
+        cin >> price_per_night;
+    cout << endl << "Enter hotel " << name << "'s room " << number << ". size. : ";
+        cin >> size;
+    room = Hotel::Room(type, price_per_night, number, size);
+    hotel.setRoom(room);
+}
 
 return hotel;
 }
@@ -144,10 +166,10 @@ return hotel;
 
 void printMenu(){
 cout << endl << "**************************************************" << endl;
-cout <<" A      " << setw(10) << "Add hotel" << endl;
-cout <<" P      " << setw(10) << "Print data" << endl;
-cout <<" X      " << setw(10) << "Exit program" << endl;
-cout << "**************************************************" << endl;
+cout << left <<" A      " << setw(10) << "Add hotel" << endl;
+cout << left <<" P      " << setw(10) << "Print data" << endl;
+cout << left <<" X      " << setw(10) << "Exit program" << endl;
+cout << left <<"**************************************************" << endl;
 }
 
 

@@ -1,115 +1,97 @@
-#include<iostream>
-#include<sstream>
-#include<iomanip>
-#include<string>
+#include <iostream>
+#include <cstring>
+#include <cmath>
 using namespace std;
- 
-//Here we use keyword class to create 
-//a new data type
-class Employee
-{
-//These are private member variables
-int id;
-string name;
-float salary;
+#define PI 3.14159265
+#define LEN 20
+//This is the definition for class Triangle
 
-//Here we declare public member functions
-public:
-void set_info (int, string, float);
-string search (int);
-string to_string ();
+
+
+class Triangle {
+  const char* object_name;
+  //Here we declare ordinary non-static variables
+   float side1, side2, angle;
+   //Here we define a private static variable
+   int static object_counter;
+   //Here we declare static variable type, which has public access specifier
+     static const char* type;
+ public:
+   	 //This is the class constructor
+	 Triangle(const char*, float, float, float);
+	 Triangle(const char*);
+     //Here we declare static method set_type()
+     static void set_type(const char*);
+     //Here we declare static method get_type()
+     static const char* get_type();
+     void print_string();
 };
- 
- 
 
 
 
- 
-//This is the definition of function set_info()
-void
-Employee::set_info (int id, string name, float salary)
+//Here we declare static variable type again
+const char* Triangle::type;
+//Here we declare static variable object_counter again
+int Triangle::object_counter;
+//Here we access the static variable through the name of the class.
+Triangle:: Triangle(const char* object_name, float side1, float side2, float angle)
 {
-
-this->id = id;
-this->name = name;
-this->salary = salary;
-} 
- 
-string Employee::search (int id)
+		 //Here we increment the object counter
+		 Triangle::object_counter++;
+		 this->object_name=object_name;
+		 this->side1=side1;
+		 this->side2=side2;
+		 this->angle=angle;
+}
+Triangle::Triangle(const char* object_name)
 {
-   return this->id == id ? this->to_string () : string ("");
+		 //Here we increment the object counter
+		 Triangle::object_counter++;
+		 this->object_name=object_name;
+		 //Here we initialise numerical values to zero
+		 this->side1=this->side2=this->angle=0;
 }
- 
-string Employee::to_string () 
-{
- stringstream stm;
-stm<< fixed<< setprecision (2)<<salary;
-string salary_str = stm.str ();
-return std::to_string (id) + " " + name + " " + salary_str;
+//Here we define static method get_type()
+const char* Triangle::get_type(){
+	 return Triangle::type;
 }
- 
- 
- 
-int main ()
-{
-
-int id;
-string type, name;
-float salary;
-int counter, size;
-
-//Here we declare an object of type Employee
-Employee* employee;
-cout<<"How many employees? ";
-cin>>size;
-
-try {
-employee=new Employee[size];
-} catch(bad_alloc &ex){
-cout<<"Memory allocation failed!"<<endl;
-return 1;
+//Here we declare static method set_type()
+void Triangle::set_type(const char* type){
+ 	 Triangle::type=type;
 }
- 
- 
-//Here we bypass the Enter key
-//cin.ignore();
-
-for(int counter=0; counter<size; counter++){
-cout<<"Enter the Employee id: ";
-cin >> id;
-
-cin.ignore ();
-cout<<"Enter the Employee name: ";
-getline (cin, name);
-
-cout<<"Enter the Employee salary: ";
-cin >> salary;
-
- 
-//Here we call functions set_info() and print() of object e
-employee->set_info (id, name, salary);
- //Here we call functionse.to_string() to get employee info as text
-cout<<"Employee info: "<<employee->to_string ()<<endl;
-employee++;
-
- }
- 
- 
-
-cout<<"Enter the Employee id to search: ";
-cin >> id;
-
-employee-=size;
-
-cout<<"Employee info: ";
-for(counter=0; counter<size; counter++ ){
- //Here we call functionse.to_string() to get employee info as text
- cout<<employee[counter].search (id)<<endl;
- 
- //employee++;
+//Here we define print_string() method
+void Triangle::print_string(){
+	cout<<"object_name="<<object_name<<" object_count="<<object_counter<<" type="<<type<<" side1="<<side1<<" side2="<<side2<<" angle="<<angle<<endl;
 }
-
-delete [] employee;
- 
+int main() {
+  //Here we initialise class private static variable type by calling public static method
+ //set_type() of the class. We don't need to create any object to call a static method.
+  Triangle::set_type("Scalene");
+  //Here we access the public static method through the name of the class
+   cout<<"The value of Triangle::type: "<<Triangle::get_type()<<endl;
+ //Here we initialise triangle_1 object
+  Triangle triangle_1("triangle_1", 10, 8, 38);
+  //Here we print the contents of the object as text
+   triangle_1.print_string();
+   ////Here we define a new Triangle object, but we do not initialise the value for
+   //type attribute. Since type attribute is static, it has the value initialised earlier
+    Triangle triangle_2("triangle_2", 12, 12, 60);
+    //Here we print the contents of the object as text
+     triangle_2.print_string();
+    //Here we define a new Triangle object with default constructor
+     Triangle triangle_3("triangle_3", 10,10, 30);
+     //Here we print the contents of the object as text
+          triangle_3.print_string();
+          //Here we set the type for triangle_3. Since attribute type is static, the new value
+        //will be set for all objects of class Triangle;
+         triangle_3.set_type("Isosceles");
+         cout<<endl;
+  cout<<"Printing Triangle objects as text after setting type attribute through triangle_3:"<<endl;
+  //Here we print the contents of the object as text
+       triangle_3.print_string();
+       //Here we print the contents of the object as text
+            triangle_2.print_string();
+            //Here we print the contents of the object as text
+                 triangle_1.print_string();
 return 0;
 }
