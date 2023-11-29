@@ -2,6 +2,10 @@
 #include<iomanip>
 #include<string>
 #include<vector>
+// #include<unistd.h>
+
+#include <windows.h>
+
 #include"class.h"
 
 
@@ -14,7 +18,7 @@ const string Admin::admin_password = "a";
 void printMenu(void);
 void createUserObject(Admin*, vector<User>&);
 void printUserObjects(vector<User>);
-
+void searchUserObject(vector<User>);
 
 // MAIN
 
@@ -42,7 +46,7 @@ switch(command){
         break;
     
     case 'S':
-        
+        searchUserObject(user);
         break;
 
 
@@ -75,31 +79,48 @@ return false;
 
 void Admin::setUsername(const string new_username, User &user_obj){
 if(this->Authenticate()) user_obj.username=new_username;
-cout << "\ndebug: " <<user_obj.username << "\n";
-cout << "\ndebug: " <<user_obj.password << "\n";
+// cout << "\ndebug: " <<user_obj.username << "\n";
+// cout << "\ndebug: " <<user_obj.password << "\n";
 }
 void Admin::setPassword(const string new_password, User &user_obj){
 if(this->Authenticate()) user_obj.password=new_password;
-cout << "\ndebug: " <<user_obj.username << "\n";
-cout << "\ndebug: " <<user_obj.password << "\n";
+// cout << "\ndebug: " <<user_obj.username << "\n";
+// cout << "\ndebug: " <<user_obj.password << "\n";
 }
-
 
 
 string User::getInfo(){
 std::stringstream user_stream;
+user_stream << "--------------------------------------------\n"  
+            <<"Username: " << this->username << "\nName: " << this->name_first << " " << this->name_last
+            << "\nPhone: " << this->phone_number
+            << "\n--------------------------------------------\n";
 
-
-user_stream << "Username: " << this->username << "\nName: " << this->name_first << " " << this->name_last
-            << "\nPhone: " << this->phone_number;
- 
 return user_stream.str();
+}
 
+
+bool User::Search(std::string input){
+if(input == this->username) return true;
+return false;
 }
 
 
 
 // FUNCTIONS
+
+
+void searchUserObject(vector<User> user){
+string input;
+
+cout << "\nEnter username to be searched: ";
+    cin >> input;
+
+for(auto obj : user) if(obj.Search(input)) cout << obj.getInfo();
+
+else cout << "User not found :C";
+}
+
 
 void createUserObject(Admin* admin, vector<User> &user){
 User user_obj;
@@ -116,14 +137,14 @@ cout << "\nEnter phone number: ";
 
 user_obj=User(name_first,name_last,phone_number);
 
-
 cout << "\nEnter username: ";
     cin >> username;
     admin->setUsername(username, user_obj);
-cout << "\nEnter password: ";
-    cin >> password;
-    admin->setPassword(password, user_obj);
 
+cout << "\nEnter password: ";
+    getline(cin, password);
+
+admin->setPassword(password, user_obj);
 
 user.push_back(user_obj);
 
@@ -132,9 +153,9 @@ user.push_back(user_obj);
 
 void printUserObjects(vector<User> user){
 for(auto obj : user){
-cout <<"--------------------------------------------\n";
+
 cout << obj.getInfo();
-cout <<"\n--------------------------------------------";
+
 }
 }
 

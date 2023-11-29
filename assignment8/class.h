@@ -14,7 +14,7 @@ private:
 
 public:
     std::string getInfo(void);
-    User* Search(std::string);
+    bool Search(std::string);
 
     User(std::string, std::string, std::string);
     User();
