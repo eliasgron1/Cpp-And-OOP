@@ -105,14 +105,9 @@ cout << "Enter employee id: ";
     cin >> id_search;
 
 
-        if((obj.search(id_search)) !=NULL ) obj.toString(); 
+    for(auto obj:employee)if((obj.search(id_search)) !=NULL ) obj.toString(); 
 
-        // for(int i=0; i<employee.size(); i++){ 
-        //     if(employee[i].search(id_search)==employee[i]){
-        //         employee.erase(employee.begin()+i);
-        //         cout << "deleting: " << endl;
-        //     }
-        // }
+
 }
 
 
