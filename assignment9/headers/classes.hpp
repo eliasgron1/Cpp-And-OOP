@@ -10,10 +10,15 @@ private:
     string address;
 
 public:
-    Person(string, string, string);
     Person();
 
+    void setPersonData(string, string, string);
+    void printPersonData(void);
+
+    Person* searchPerson(string);
+
 };
+
 
 class Profession{
 private:
@@ -21,30 +26,32 @@ private:
     int years_of_exp;
     float latest_salary;
 public:
-    Profession(string, int, float);
     Profession();
 
-    float getSalary();
-    string getFirm();
-    float getNetSalary();
+    string getTitle(void);
+    void setTitle(string);
+    float getSalary(string);
+    void setLatestSalary(float);
+    void setExperience(int);
     int getExperience();
 };
 
-class Employee : private Profession, private Person{
+
+
+class Employee : public Profession, public Person{
 private: 
     int id;
     float salary;
     float tax_rate;
     static string firm;
 public:
-    Employee(int, float, float, string);
+    Employee(int, float, float, int, string, string, string, string);
     Employee();
 
-    void setFirm();
-    string getFirm();
+    static void setFirm(string);
+    static string getFirm();
     float getNetSalary();
     void print();
-
 
 };
 
