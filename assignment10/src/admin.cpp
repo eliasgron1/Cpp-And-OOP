@@ -27,8 +27,8 @@ while(authentication_passed == false){
         authentication_passed=false;
     }
 }
-cout << "\ndebug: " <<user_obj.username << "\n";
-cout << "\ndebug: " <<user_obj.password << "\n";
+// cout << "\ndebug: " <<user_obj.username << "\n";
+// cout << "\ndebug: " <<user_obj.password << "\n";
 }
 
 
@@ -44,6 +44,25 @@ while(authentication_passed == false){
         authentication_passed=false;
     }
 }
-cout << "\ndebug: " <<user_obj.username << "\n";
-cout << "\ndebug: " <<user_obj.password << "\n";
+// cout << "\ndebug: " <<user_obj.username << "\n";
+// cout << "\ndebug: " <<user_obj.password << "\n";
+}
+
+
+void Admin::setPermissions(User &user, char* permissions){
+    if(authenticate() == true){
+        user.setPermissions(permissions);
+    }
+    else{
+        cout << "permissions not set";
+    }
+}
+
+void Admin::removePermissions(User &user, char* permissions_to_delete){
+    if(authenticate() == true){
+        user.removePermissions(permissions_to_delete);
+    }
+    else{
+        cout << "permissions not set";
+    }
 }

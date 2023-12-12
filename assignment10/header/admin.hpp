@@ -10,10 +10,11 @@ private:
 
 public:
     bool authenticate();
-    void setUsername(const std::string, User&);
-    void setPassword(const std::string, User&);
-    void setPermissions(User, char*);
-    void removePermissions(User, char*);
+    void setUsername(const string, User&);
+    void setPassword(const string, User&);
+    void setPermissions(User&, char*);
+    void removePermissions(User&, char*);
+    
 };
 
 #endif

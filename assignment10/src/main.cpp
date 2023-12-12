@@ -2,6 +2,7 @@
 #include<iomanip>
 #include<string>
 #include<vector>
+#include <cstring>
 
 #include"../header/person.hpp"
 #include"../header/user.hpp"
@@ -13,15 +14,18 @@
 
 using namespace std;
 
-const string Admin::admin_username = "a";
-const string Admin::admin_password = "a";
+const string Admin::admin_username = "admin";
+const string Admin::admin_password = "pass";
 
 
 void printMenu(void);
 void createUserObject(Admin*, vector<User>&);
 
+void assignPermissions(Admin*, User&);
+void removePermissions(Admin*, User&);
+
 void printUserObjects(vector<User>);
-//void searchUserObject(vector<User>);
+void searchUserObject(Admin*, vector<User>&);
 
 
 
@@ -49,7 +53,7 @@ switch(command){
         break;
     
     case 'S':
-        //searchUserObject(user);
+        searchUserObject(admin, user);
         break;
 
 
@@ -73,7 +77,25 @@ void createUserObject(Admin* admin, vector<User> &user){
 User user_obj;
 string first_name, last_name, phone_number;
 string username, password;
-bool authtenticate_failed = true;
+
+
+string input_perms;
+
+
+    
+cout << "\nEnter username: ";
+    cin >> username;
+    cout << username;
+    admin->setUsername(username, user_obj);
+
+cout << endl <<"Enter password: ";
+    cin >> password;
+    cout << password;
+    admin->setPassword(password, user_obj);
+
+    assignPermissions(admin, user_obj);
+
+
 
 cout << "\nEnter first name: ";
     cin >> first_name;
@@ -82,25 +104,109 @@ cout << "\nEnter last name: ";
 cout << "\nEnter phone number: ";
     cin >> phone_number;
 
-
-
-
-cout << "\nEnter username: ";
-    cin >> username;
-    admin->setUsername(username, user_obj);
-
-cout << "\nEnter password: ";
-    cin >> password;
-    admin->setPassword(password, user_obj);
-
-
-
-
 user_obj.setPersonInformation(first_name, last_name, phone_number);
 
+for(auto obj : user){
+    if(obj.comparePhoneNumber(user_obj)){
+        cout << "\nDuplicate phone number detected";
+    }
+}
 user.push_back(user_obj);
+}
+
+
+void searchUserObject(Admin* admin, vector<User> &users){
+string input;
+char command;
+bool user_found = false;
+
+cout << "\nEnter user name, phone or surname: ";
+    cin >> input;
+
+for(auto &obj : users){
+    if(obj.search(input) != NULL){
+        user_found = true;
+        cout << obj.toString(obj);
+    }
+
+    if(user_found){
+        cout <<" A      " << setw(10) << "Add new Permissions" << endl;
+        cout <<" B      " << setw(10) << "Remove Permissions" << endl;
+            cin >> command;
+        if(toupper(command) == 'A') assignPermissions(admin, obj);
+        if(toupper(command) == 'B') removePermissions(admin, obj);
+    }
+}
+
+
+if(!user_found) cout << "User Not Found!";
+}
+
+
+
+
+void removePermissions(Admin* admin, User &user){
+char permissions_to_delete[3] = {'-','-','-'};
+string input;
+
+
+cout << "\nCurrent perms: " << user.getPermissions();
+cout << "\nEnter permissions to remove: ";
+cin >> input;
+
+for(int i=0;i<3;i++){
+    switch(toupper(input[i])){
+        case 'R':
+        permissions_to_delete[0] = 'r';
+        break;
+
+        case 'W':
+        permissions_to_delete[1] = 'w';
+        break;
+
+        case 'X':
+        permissions_to_delete[2] = 'x';
+        break;
+
+
+    }
+}
+
+admin->removePermissions(user, permissions_to_delete);
 
 }
+
+
+
+
+
+void assignPermissions(Admin* admin, User& user_obj){
+char permissions[3] = {'-','-','-'}; 
+string input;
+
+cout << "\nEnter user permissions(rwx): ";
+    cin >> input;
+
+for(int i=0;i<3;i++){
+    switch(toupper(input[i])){
+        case 'R':
+        permissions[0] = 'r';
+        break;
+
+        case 'W':
+        permissions[1] = 'w';
+        break;
+
+        case 'X':
+        permissions[2] = 'x';
+        break;
+
+    }
+}
+admin->setPermissions(user_obj, permissions);
+}
+
+
 
 
 void printUserObjects(vector<User> user){
@@ -110,19 +216,7 @@ void printUserObjects(vector<User> user){
 }
 
 
-// void searchUserObject(vector<User> user){
-// string input;
 
-// cout << "\nEnter username to be searched: ";
-//     cin >> input;
-
-// for(auto obj : user){
-//     if(obj.search(input)) cout << obj.getInfo();
-    
-//     else cout << "User not found :C";
-
-// }
-// }
 
 void printMenu(){
 cout << left << endl << "**************************************************" << endl;

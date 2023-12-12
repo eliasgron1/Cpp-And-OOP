@@ -18,11 +18,11 @@ private:
 
 public:
 
-    bool compare(User);
+    bool comparePhoneNumber(User);
 
+    string getPermissions();
     string getUsername();
 
-    User(string, string, string, string, string);
     User();
 
 };

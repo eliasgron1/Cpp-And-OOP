@@ -13,8 +13,8 @@ class Person{
 
     public:
 
+    string getPhoneNumber();
     void setPersonInformation(string, string, string);
-
     string toString(User&);
     Person* search(string);
 
